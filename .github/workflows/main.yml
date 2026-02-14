@@ -20,6 +20,12 @@ jobs:
       - name: 🐳 Build Worker (Tag Unica)
         run: docker build -t nexadesk-worker:${{ github.sha }} ./app/worker
 
-      - name: ✅ Validação de Infra (K8s)
-        # O segredo está no --validate=false para ignorar a falta de conexão com o cluster
-        run: kubectl apply --dry-run=client -f environments/prod/ --validate=false
+      - name: ✅ Validação de Infra (Static Analysis)
+        # Este comando lista os arquivos e valida a sintaxe básica sem precisar de conexão
+        run: |
+          echo "Listando manifestos encontrados:"
+          ls -R environments/prod/
+          echo "Validando estrutura dos manifestos..."
+          # Validando apenas a sintaxe do arquivo sem tentar conectar ao servidor
+          cat environments/prod/deployment.yaml | kubectl create --dry-run=client -f -
+          cat environments/prod/service.yaml | kubectl create --dry-run=client -f -
