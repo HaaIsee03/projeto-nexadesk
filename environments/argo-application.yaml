@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nexadesk-prod
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  source:
+    repoURL: 'https://github.com/HaaISee03/projeto-nexadesk'
+    targetRevision: HEAD
+    path: environments/prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

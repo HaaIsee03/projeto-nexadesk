@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexadesk-api-staging
+spec:
+  replicas: 1  # Apenas 1 réplica para testes (economia de recursos)
+  selector:
+    matchLabels:
+      app: nexadesk-api-staging
+  template:
+    metadata:
+      labels:
+        app: nexadesk-api-staging
+    spec:
+      containers:
+      - name: api
+        image: nexadesk-api:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "staging" # Variável de ambiente para identificar o teste

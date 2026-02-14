@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexadesk-api-service-staging
+spec:
+  selector:
+    app: nexadesk-api-staging
+  ports:
+    - protocol: TCP
+      port: 8080 # Porta diferente para não conflitar com a porta 80 da produção
+      targetPort: 3000
+  type: ClusterIP # Tipo interno para segurança (não expõe para a internet direto)

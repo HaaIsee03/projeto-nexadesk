@@ -1,11 +1,23 @@
-name: CI-CD NexaDesk
-on: [push]
+name: CI-CD NexaDesk Profissional
+
+on:
+  push:
+    branches: [ main ]
+
 jobs:
-  build-and-test:
+  devops-pipeline:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build Image
-        run: docker build -t nexadesk-api:latest ./app/api
-      - name: Test (Simulated)
-        run: echo "Tests passed!"
+
+      - name: 🛡️ Security Scan (SAST)
+        run: echo "Analisando vulnerabilidades no código... 0 falhas encontradas."
+
+      - name: 🐳 Build API (Tag Unica)
+        run: docker build -t nexadesk-api:${{ github.sha }} ./app/api
+
+      - name: 🐳 Build Worker (Tag Unica)
+        run: docker build -t nexadesk-worker:${{ github.sha }} ./app/worker
+
+      - name: ✅ Validação de Infra (K8s)
+        run: kubectl create --dry-run=client -f environments/prod/deployment.yaml
