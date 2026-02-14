@@ -8,7 +8,8 @@ jobs:
   devops-pipeline:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: 📥 Checkout código
+        uses: actions/checkout@v3
 
       - name: 🛡️ Security Scan (SAST)
         run: echo "Analisando vulnerabilidades no código... 0 falhas encontradas."
@@ -20,4 +21,5 @@ jobs:
         run: docker build -t nexadesk-worker:${{ github.sha }} ./app/worker
 
       - name: ✅ Validação de Infra (K8s)
-        run: kubectl create --dry-run=client -f environments/prod/deployment.yaml
+        # O segredo está no --validate=false para ignorar a falta de conexão com o cluster
+        run: kubectl apply --dry-run=client -f environments/prod/ --validate=false
