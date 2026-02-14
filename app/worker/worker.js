@@ -1,2 +1,4 @@
-console.log("NexaDesk Worker processando filas...");
-setInterval(() => console.log("Verificando novos chamados..."), 5000);
+console.log("NexaDesk Worker processando tarefas em background...");
+setInterval(() => {
+    console.log(`[${new Date().toISOString()}] Verificando fila de chamados...`);
+}, 5000);
