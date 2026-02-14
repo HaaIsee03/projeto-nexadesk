@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexadesk-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nexadesk-api
+  template:
+    metadata:
+      labels:
+        app: nexadesk-api
+    spec:
+      containers:
+      - name: api
+        image: nexadesk-api:latest
+        ports:
+        - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
