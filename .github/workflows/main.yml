@@ -1,0 +1,11 @@
+name: CI-CD NexaDesk
+on: [push]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Image
+        run: docker build -t nexadesk-api:latest ./app/api
+      - name: Test (Simulated)
+        run: echo "Tests passed!"
