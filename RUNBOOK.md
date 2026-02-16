@@ -3,7 +3,7 @@
 **Curso:** Engenharia de Computação – Centro Universitário UniFECAF  
 **Disciplina:** DevOps e Cultura de Confiabilidade  
 **Estudante:** Isaias Bruno da Silva Júnior (HaaISee03)  
-**Tutor(a):** Rafaela Silva  
+**Tutor(a):** Fernando Leonid  
 
 ---
 
